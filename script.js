@@ -10,14 +10,31 @@ for (let i = 0; i < btnAll.length; i++) {
   });
 }
 
+const signs = ["+", "-", "/", "*"];
+
 btnEqual.addEventListener("click", function () {
-  if (screen.value === "") {
+  let scr = screen.value;
+
+  if (scr === "") {
     screen.value = "Input Required";
     screen.style.color = "red";
 
     setTimeout(function () {
       window.location.reload();
     }, 1000);
+    return;
+  }
+
+  for (let k = 0; k < signs.length; k++) {
+    if (scr[scr.length - 1] === signs[k]) {
+      screen.value = "Error";
+      screen.style.color = "red";
+
+      setTimeout(function () {
+        window.location.reload();
+      }, 1000);
+      return;
+    }
   }
 
   let result = eval(screen.value);
